@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const DonorCard = ({ item }: any) => {
   console.log(item);
-  const { availability, name, location, email, bloodType } = item;
+  const { availability, name, location, email, bloodType,id } = item;
   return (
     <Box
     mx={1}
@@ -42,7 +42,7 @@ const DonorCard = ({ item }: any) => {
           Availability : <strong>{availability===true?"true":"false"}</strong>
         </Typography>
         <Typography sx={{ marginLeft: "auto" }}>
-          <Link href={"/"}>
+          <Link href={`/donorlist/${id}`}>
             <Button>Details</Button>
           </Link>
         </Typography>

@@ -1,4 +1,5 @@
 "use client";
+import DonorCard from "@/components/Home/donarCard/DonorCard";
 import { availability, bloodType } from "@/components/constant";
 import BCForm from "@/components/form/BCForm";
 import BCInput from "@/components/form/BCInput";
@@ -7,11 +8,11 @@ import { useGetAllDonorListQuery } from "@/redux/api/userApi";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
-import DonorCard from "../donarCard/DonorCard";
 
-const SearchDonar = () => {
+
+const DonorList = () => {
   const [query, setQuery] = useState({});
-  const { data, isLoading } = useGetAllDonorListQuery({ ...query });
+  const { data, isLoading } = useGetAllDonorListQuery({ ...query,limit:30 });
   useEffect(() => {}, [query]);
 
   const handleSubmit = async (values: FieldValues) => {
@@ -21,7 +22,7 @@ const SearchDonar = () => {
   return (
     <Box>
       <Box
-        sx={{  py: "30px", mx: "auto", mb: "15px" }}
+        sx={{ backgroundColor: "#FCE0DF", py: "30px", mx: "auto",mt:"35px", mb: "15px" }}
       >
         <Container>
           <Typography
@@ -73,9 +74,7 @@ const SearchDonar = () => {
           </BCForm>
         </Container>
       </Box>
-
-      <Box>
-        <Typography
+      <Typography
           sx={{
             width: "50%",
             color: "white",
@@ -89,13 +88,14 @@ const SearchDonar = () => {
             mb: 6,
           }}
         >
-          Top 10 Recent Donor
+    Total donors found {data?.meta?.total}
         </Typography>
+      <Box>
         <Container>
           <Grid container spacing={1}>
             {isLoading
               ? "Loading"
-              : data?.appointments?.slice(0, 10).map((item: any) => (
+              : data?.appointments?.map((item: any) => (
                   <Grid item md={4} key={item.id}>
                     <DonorCard item={item}></DonorCard>
                   </Grid>
@@ -107,4 +107,4 @@ const SearchDonar = () => {
   );
 };
 
-export default SearchDonar;
+export default DonorList;

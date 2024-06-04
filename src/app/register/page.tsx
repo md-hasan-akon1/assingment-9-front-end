@@ -21,8 +21,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import BCDatePicker from "@/components/form/BCDatePicker";
 import BCSelectField from "@/components/form/BCSelectField";
 import { bloodType } from "@/components/constant";
-import { registrationSchema } from "@/utils/registrationSchema";
-const defaultValue = {
+import { userRegistration } from "@/services/actions/userRegistration";
+import { dateFormatter } from "@/utils/dateFormetter";
+import { userLogin } from "@/services/actions/userLogin";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
+const defaultValues = {
   name: "",
   email: "",
   password: "",
@@ -34,6 +39,7 @@ const defaultValue = {
   lastDonationDate: null,
 };
 const RegisterPage = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConPassword, setShowConPassword] = useState(false);
 
@@ -46,7 +52,15 @@ const RegisterPage = () => {
     event.preventDefault();
   };
   const handleSubmit = async (values: FieldValues) => {
-    console.log(values);
+    values.age = Number(values.age);
+    values.lastDonationDate = dateFormatter(values.lastDonationDate);
+
+    const res = await userRegistration(values);
+    if (res.success) {
+      await userLogin({ email: values.email, password: values.password });
+      router.push("/");
+      toast.success(res?.message);
+    }
   };
 
   return (
@@ -67,8 +81,8 @@ const RegisterPage = () => {
         </Typography>
         <BCForm
           onSubmit={handleSubmit}
-          resolver={zodResolver(registrationSchema)}
-          // defaultValues={defaultValue}
+          // defaultValues={defaultValues}
+          //  resolver={zodResolver(registrationSchema)}
         >
           <Grid container spacing={3}>
             <Grid item xs={6}>
@@ -80,7 +94,6 @@ const RegisterPage = () => {
             <Grid item xs={6}>
               <BCInput
                 label="Password"
-                required={true}
                 sx={{ marginTop: "10px" }}
                 name="password"
                 fullWidth
@@ -104,7 +117,6 @@ const RegisterPage = () => {
             <Grid item xs={6}>
               <BCInput
                 label="confirmPass"
-                required={true}
                 sx={{ marginTop: "10px" }}
                 name="confirmPass"
                 fullWidth

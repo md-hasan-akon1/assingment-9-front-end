@@ -20,7 +20,7 @@ const BCInput = ({
   label,
   size="small",
   fullWidth,
-  type ="text",
+  type,
   sx,
   required,
   InputProps
@@ -29,7 +29,6 @@ const BCInput = ({
   return (
     <Controller
       name={name}
-
       control={control}
       render={({ field,fieldState:{error} }) => (
         <TextField

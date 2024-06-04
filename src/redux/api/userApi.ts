@@ -16,7 +16,15 @@ export const userApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getDonorDetail: build.query({
+      query: (args) => {
+    
+        return { url: `/donor-list/${args}`, method: "GET",};
+      },
+     
+    }),
+    
   }),
 });
 
-export const { useGetAllDonorListQuery } = userApi;
+export const { useGetAllDonorListQuery,useGetDonorDetailQuery } = userApi;
