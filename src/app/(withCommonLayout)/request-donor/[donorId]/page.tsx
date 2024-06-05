@@ -9,6 +9,7 @@ import {
 } from "@/redux/api/userApi";
 import { dateFormatter } from "@/utils/dateFormetter";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -19,7 +20,7 @@ type TParams = {
 };
 
 const DonorRequestPage = ({ params }: TParams) => {
- 
+  const router = useRouter();
   const id = params?.donorId;
   const { data, isSuccess } = useGetMeQuery({});
 
@@ -37,12 +38,11 @@ const DonorRequestPage = ({ params }: TParams) => {
   const handleSubmit = async (values: FieldValues) => {
     values.dateOfDonation = dateFormatter(values.dateOfDonation);
     values.donorId = id;
-    const res = await createDonarRequest(values)
-   if(res.id){
-    toast.success(res.message)
-   }
-   
-   console.log(res);
+    const res = await createDonarRequest(values).unwrap();
+    if (res.id) {
+      toast.success("Request Send Successfully");
+      router.push("/");
+    }
   };
   return (
     <Box>

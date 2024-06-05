@@ -18,8 +18,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getUser } from "@/services/actions/getUserInfo";
 
-const pages = ["Home", "About Us", "Login", "Register", "DonorList"];
-const page2 = [
+const pages = [
   { name: "Home", path: "/" },
   {
     name: "About Us",
@@ -38,7 +37,16 @@ const page2 = [
     path: "/DonorList",
   },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = [
+  {
+    name: "Profile",
+    path: "/Profile",
+  },
+  {
+    name: "Change Password",
+    path: "/changePassword",
+  },
+];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -121,15 +129,23 @@ const Navbar = () => {
             >
               {/* for phone */}
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography
-                    textAlign="center"
-                    color="black"
-                    justifyContent="center"
+                <Link
+                  href={`${page.path}`}
+                  key={page.path}
+                  onClick={handleCloseNavMenu}
+                >
+                  <Button
+                    sx={{
+                      display:"flex",
+                      textAlign: "center",
+                      justifyContent: "center",
+                      margin:"4px",
+                      direction:"column"
+                    }}
                   >
-                    {page}
-                  </Typography>
-                </MenuItem>
+                    {page.name}
+                  </Button>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -169,7 +185,7 @@ const Navbar = () => {
               },
             }}
           >
-            {page2.map((page) => (
+            {pages.map((page) => (
               <Link href={page.path.toLowerCase()} key={page.path}>
                 {" "}
                 <Button
@@ -192,7 +208,7 @@ const Navbar = () => {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px" }}
+              sx={{ mt: "45px", }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -208,9 +224,14 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
+                <Link
+                
+                  href={`${setting.path}`}
+                  key={setting.path}
+                  onClick={handleCloseUserMenu}
+                >
+                  <Typography sx={{mx:"30px" , px:"20px",py:"10px", "&:hover": { backgroundColor:"gray ", color:"white"}}}>{setting.name}</Typography>
+                </Link>
               ))}
             </Menu>
           </Box>

@@ -23,7 +23,7 @@ export const userApi = baseApi.injectEndpoints({
     }),
     getMe: build.query({
       query: () => {
-        return { url: `/my-profile`, method: "GET" };
+        return { url:`/my-profile`, method: "GET" };
       },
     }),
     createDonarRequest: build.mutation({
