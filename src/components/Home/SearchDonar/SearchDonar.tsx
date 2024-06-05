@@ -21,7 +21,7 @@ const SearchDonar = () => {
   return (
     <Box>
       <Box
-        sx={{  py: "30px", mx: "auto", mb: "15px" }}
+        sx={{  backgroundColor: "#FCE0DF", py: "30px", mx: "auto", mb: "15px" }}
       >
         <Container>
           <Typography

@@ -154,10 +154,18 @@ const RegisterPage = () => {
             <Grid item xs={6}>
               <BCInput name="bio" type="text" label="bio" fullWidth />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <BCDatePicker
                 name="lastDonationDate"
                 label="lastDonationDate"
+                fullWidth={true}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <BCInput
+                name="phoneNumber"
+                label="phoneNumber"
+                type="text"
                 fullWidth={true}
               />
             </Grid>

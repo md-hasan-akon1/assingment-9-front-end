@@ -1,6 +1,9 @@
 
+import { accessTokenKey } from "@/components/constant";
+import { getToken } from "@/services/actions/getToken";
 import { IGenericErrorResponse, ResponseSuccessType } from "@/types/common";
 import axios from "axios";
+
 
 const instance = axios.create();
 instance.defaults.headers.post["Content-Type"] = "application/json";
@@ -9,13 +12,13 @@ instance.defaults.timeout = 60000;
 
 // Add a request interceptor
 instance.interceptors.request.use(
-  function (config) {
+ async function (config) {
     // Do something before request is sent
-    // const accessToken = getTokenLocalStorage(authKey);
-
-    // if (accessToken) {
-    //   config.headers.Authorization = accessToken;
-    // }
+     const accessToken =await getToken(accessTokenKey);
+console.log(accessToken)
+    if (accessToken) {
+      config.headers.Authorization = accessToken;
+    }
     return config;
   },
   function (error) {

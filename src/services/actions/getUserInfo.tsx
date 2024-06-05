@@ -1,14 +1,13 @@
 "use server";
-
-import { accessToken } from "@/components/constant";
 import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
-export const getUser = async () => {
-  const token = cookies().get(accessToken)?.value;
+import { accessTokenKey } from "@/components/constant";
+export const getUser =  () => {
+  const token = cookies().get(accessTokenKey)?.value;
   if (token) {
           const decoded = jwtDecode(token!);;
     return decoded
-    console.log(decoded);
+    
   }
   
  

@@ -19,9 +19,10 @@ const BCForm = ({ children, onSubmit,resolver,defaultValues}: TFormProps) => {
   }
   const methods = useForm(formConfig);
 
-  const { handleSubmit } = methods;
+  const { handleSubmit,reset } = methods;
   const submit: SubmitHandler<FieldValues> = (data) => {
     onSubmit(data);
+    reset()
   };
   return (
     <FormProvider {...methods}>

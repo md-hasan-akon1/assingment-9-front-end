@@ -1,5 +1,5 @@
 "use server";
-import { accessToken, refreshToken } from "@/components/constant";
+import {  accessTokenKey,  refreshTokenKey } from "@/components/constant";
 import { cookies } from "next/headers";
 export const userLogin = async (data: any) => {
   const res = await fetch(`${process.env.BACKEND_URL}/login`, {
@@ -13,8 +13,8 @@ export const userLogin = async (data: any) => {
   });
   const userInfo = await res.json();
   if (userInfo.success) {
-     cookies().set(refreshToken, userInfo?.data?.refreshToken);
-     cookies().set(accessToken, userInfo?.data?.accessToken);
+     cookies().set(refreshTokenKey, userInfo?.data?.refreshToken);
+     cookies().set(accessTokenKey, userInfo?.data?.accessToken);
     
   }
  

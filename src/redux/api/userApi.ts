@@ -18,13 +18,25 @@ export const userApi = baseApi.injectEndpoints({
     }),
     getDonorDetail: build.query({
       query: (args) => {
-    
-        return { url: `/donor-list/${args}`, method: "GET",};
+        return { url: `/donor-list/${args}`, method: "GET" };
       },
-     
     }),
-    
+    getMe: build.query({
+      query: () => {
+        return { url: `/my-profile`, method: "GET" };
+      },
+    }),
+    createDonarRequest: build.mutation({
+      query: (data) => {
+        return { url: `/donation-request`, method: "POST", data };
+      },
+    }),
   }),
 });
 
-export const { useGetAllDonorListQuery,useGetDonorDetailQuery } = userApi;
+export const {
+  useGetAllDonorListQuery,
+  useGetDonorDetailQuery,
+  useGetMeQuery,
+  useCreateDonarRequestMutation
+} = userApi;
