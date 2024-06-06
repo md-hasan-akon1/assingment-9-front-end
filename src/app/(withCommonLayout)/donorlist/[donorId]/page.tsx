@@ -26,7 +26,7 @@ type TParams = {
 const DonorDetail = ({ params }: TParams) => {
   const id = params?.donorId;
   const { data } = useGetDonorDetailQuery(id);
-  console.log(data);
+
   return (
     <Container sx={{ mt: "50px" }}>
       <Box
