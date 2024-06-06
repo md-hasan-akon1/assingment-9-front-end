@@ -15,7 +15,6 @@ instance.interceptors.request.use(
  async function (config) {
     // Do something before request is sent
      const accessToken =await getToken(accessTokenKey);
-console.log(accessToken)
     if (accessToken) {
       config.headers.Authorization = accessToken;
     }
@@ -49,7 +48,7 @@ instance.interceptors.response.use(
     // console.log(config);
     if (error?.response?.status === 500 && !config.sent) {
       config.sent = true;
-      // const response = await getNewAccessToken();
+     // const response = await getNewAccessToken();
       // const accessToken = response?.data?.accessToken;
       // config.headers["Authorization"] = accessToken;
       // setLocalStorage(authKey, accessToken);
@@ -61,6 +60,7 @@ instance.interceptors.response.use(
         errorMessages: error?.response?.data?.message,
       };
       // return Promise.reject(error);
+     
       return responseObject;
     }
   }

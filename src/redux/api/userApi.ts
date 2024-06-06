@@ -27,6 +27,12 @@ export const userApi = baseApi.injectEndpoints({
       },
       providesTags:[tagTypes.getMe]
     }),
+    myBloodRequest: build.query({
+      query: () => {
+        return { url:`/donation-request`, method: "GET" };
+      },
+
+    }),
     createDonarRequest: build.mutation({
       query: (data) => {
         return { url: `/donation-request`, method: "POST", data };
@@ -38,6 +44,12 @@ export const userApi = baseApi.injectEndpoints({
       },
       invalidatesTags:[tagTypes.getMe]
     }),
+    changePassword: build.mutation({
+      query: (data) => {
+        return { url: `/change-password`, method: "PUT", data };
+      },
+      
+    }),
   }),
 });
 
@@ -46,5 +58,7 @@ export const {
   useGetDonorDetailQuery,
   useGetMeQuery,
   useCreateDonarRequestMutation,
-  useUpdateProfileMutation
+  useUpdateProfileMutation,
+  useChangePasswordMutation,
+  useMyBloodRequestQuery
 } = userApi;

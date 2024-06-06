@@ -13,7 +13,7 @@ const SearchDonar = () => {
   const [query, setQuery] = useState({});
   const { data, isLoading } = useGetAllDonorListQuery({ ...query });
   useEffect(() => {}, [query]);
-
+console.log(data)
   const handleSubmit = async (values: FieldValues) => {
     setQuery(values);
   };

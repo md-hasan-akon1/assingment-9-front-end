@@ -1,5 +1,4 @@
 "use client";
-
 import { availability, bloodType } from "@/components/constant";
 import BCDatePicker from "@/components/form/BCDatePicker";
 import BCForm from "@/components/form/BCForm";
@@ -22,7 +21,7 @@ const EditProfilePage = ({ params }: TParams) => {
   //   console.log(params?.doctorId);
   const router = useRouter();
   const { data,isSuccess } = useGetMeQuery({});
-  const [updateProfile]=useUpdateProfileMutation()
+  const [updateProfile,{isLoading}]=useUpdateProfileMutation()
 
   const id = params?.userId;
  
@@ -35,7 +34,7 @@ const EditProfilePage = ({ params }: TParams) => {
     values.userProfile.lastDonationDate = dateFormatter(values.userProfile.lastDonationDate);
 
    
-    // console.log({ id: values.id, body: values });
+    
 
     try {
       const res = await updateProfile(values).unwrap();
@@ -156,7 +155,7 @@ const EditProfilePage = ({ params }: TParams) => {
             </Grid>
           </Grid>
 
-          <Button sx={{ width: "100%" }} type="submit">
+          <Button disabled={isLoading} sx={{ width: "100%" }} type="submit">
             Update
           </Button>
         </BCForm>

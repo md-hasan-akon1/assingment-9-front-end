@@ -8,11 +8,12 @@ type TFormConFig = {
 type TFormProps = {
   children: React.ReactNode;
   onSubmit: SubmitHandler<FieldValues>;
+
 }&TFormConFig;
 const BCForm = ({ children, onSubmit,resolver,defaultValues}: TFormProps) => {
   const formConfig:TFormConFig={}
   if(resolver){
-    formConfig["resolver"]=resolver
+    formConfig[ "resolver"]=resolver
   }
   if(defaultValues){
     formConfig["defaultValues"]=defaultValues
@@ -22,11 +23,11 @@ const BCForm = ({ children, onSubmit,resolver,defaultValues}: TFormProps) => {
   const { handleSubmit,reset } = methods;
   const submit: SubmitHandler<FieldValues> = (data) => {
     onSubmit(data);
-    reset()
+   reset() 
   };
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(submit)}>{children}</form>
+      <form  onSubmit={handleSubmit(submit)}>{children}</form>
     </FormProvider>
   );
 };

@@ -13,6 +13,7 @@ import KeyIcon from "@mui/icons-material/Key";
 import BookOnlineIcon from "@mui/icons-material/BookOnline";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import RequestPageIcon from '@mui/icons-material/RequestPage';
 import { USER_ROLE } from "@/components/constant/role";
 import { DrawerItem, UserRole } from "@/types/common";
 
@@ -20,6 +21,11 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
   const roleMenus: DrawerItem[] = [];
 
   const defaultMenus = [
+    {
+      title: "My Blood Requests",
+      path: `my-blood-request`,
+      icon: RequestPageIcon,
+    },
     {
       title: "Profile",
       path: `profile`,
