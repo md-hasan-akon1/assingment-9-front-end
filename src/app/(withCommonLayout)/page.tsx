@@ -4,9 +4,6 @@ import HeroSection from '@/components/Home/HeroSection/HeroSection';
 import OurTeam from '@/components/Home/OurTeam/OurTeam';
 import SearchDonar from '@/components/Home/SearchDonar/SearchDonar';
 
-
-
-
 const HomePage = () => {
         return (
                 <div>

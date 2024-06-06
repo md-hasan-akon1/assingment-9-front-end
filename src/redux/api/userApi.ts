@@ -1,5 +1,5 @@
 import { baseApi } from "./baseApi";
-import { tagTypes } from "../tag-types";
+import { tagTypes, tagTypesList } from "../tag-types";
 import { IMeta } from "@/types/common";
 
 export const userApi = baseApi.injectEndpoints({
@@ -25,11 +25,18 @@ export const userApi = baseApi.injectEndpoints({
       query: () => {
         return { url:`/my-profile`, method: "GET" };
       },
+      providesTags:[tagTypes.getMe]
     }),
     createDonarRequest: build.mutation({
       query: (data) => {
         return { url: `/donation-request`, method: "POST", data };
       },
+    }),
+    updateProfile: build.mutation({
+      query: (data) => {
+        return { url: `/update-profile`, method: "PUT", data };
+      },
+      invalidatesTags:[tagTypes.getMe]
     }),
   }),
 });
@@ -38,5 +45,6 @@ export const {
   useGetAllDonorListQuery,
   useGetDonorDetailQuery,
   useGetMeQuery,
-  useCreateDonarRequestMutation
+  useCreateDonarRequestMutation,
+  useUpdateProfileMutation
 } = userApi;

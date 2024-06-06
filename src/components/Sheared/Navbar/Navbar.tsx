@@ -36,6 +36,10 @@ const pages = [
     name: "Donor List",
     path: "/DonorList",
   },
+  {
+    name: "Dashboard",
+    path: "/dashboard",
+  },
 ];
 const settings = [
   {
